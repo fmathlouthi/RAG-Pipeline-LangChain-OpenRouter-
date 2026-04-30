@@ -1,0 +1,18 @@
+[
+  {
+    "question": "What is the Single Responsibility Principle?",
+    "expected_answer": "Each module has exactly one job or responsibility."
+  },
+  {
+    "question": "What embedding model is used?",
+    "expected_answer": "all-MiniLM-L6-v2"
+  },
+  {
+    "question": "What is used for the vector store?",
+    "expected_answer": "FAISS"
+  },
+  {
+    "question": "What API is used for the LLM?",
+    "expected_answer": "OpenRouter"
+  }
+]

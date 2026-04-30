@@ -1,0 +1,34 @@
+Project Notes – Q1 2025
+
+Overview
+--------
+This project is a Retrieval Augmented Generation (RAG) pipeline built with
+Python. It follows the Single Responsibility Principle (SRP): each module
+has exactly one job.
+
+Key Components
+--------------
+- document_loader.py  : reads PDF or TXT files and returns raw text.
+- text_chunker.py     : splits long text into overlapping chunks.
+- embedding_provider.py : converts text into vector embeddings locally
+                          using sentence-transformers (all-MiniLM-L6-v2).
+- vector_store_manager.py : builds a FAISS index and performs similarity
+                            search to find the most relevant chunks.
+- answer_generator.py : sends the question + context to OpenRouter's LLM
+                        API and returns the generated answer.
+- rag_pipeline.py     : orchestrator that wires all modules together and
+                        exposes a CLI entry point.
+
+Design Goals
+------------
+1. Each file has a single, well-defined responsibility.
+2. No module imports from another module except the orchestrator.
+3. Local embeddings keep costs at zero; only the LLM call uses an API.
+4. FAISS is used instead of heavier vector databases for simplicity.
+5. OpenRouter is used so you can swap LLM providers without code changes.
+
+Setup
+-----
+pip install -r requirements.txt
+export OPENROUTER_API_KEY="your_key_here"
+python rag_pipeline.py notes.txt "What is the embedding model used?"
